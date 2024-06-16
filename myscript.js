@@ -13,12 +13,14 @@ function getComputerChoice() {
 }
 
 function playRound(buttonClicked) {
+    winnerAnnouncement.textContent = "";
     let computerChoice = getComputerChoice();
     console.log(computerChoice);
     let playerChoice = buttonClicked;
     console.log(playerChoice);
     compareChoices(computerChoice,playerChoice);
     scores.textContent = `Player: ${playerScore} Computer: ${computerScore}`;
+    checkForWinner();
 }
 
 function compareChoices(computerChoice,playerChoice) {
@@ -43,6 +45,15 @@ function compareChoices(computerChoice,playerChoice) {
         return playerScore++;}
 }
 
+function checkForWinner() {
+    if (playerScore === 5) {
+        winnerAnnouncement.textContent = "You win! Press a button to restart.";
+        resetScores();
+    } if (computerScore === 5) {
+        winnerAnnouncement.textContent = "Computer wins - game over! Press a button to restart.";
+        resetScores();
+    }}
+
 function resetScores() {
     playerScore = 0;
     computerScore = 0;
@@ -63,3 +74,4 @@ buttonContainer.addEventListener("click", (event) => playRound(event.target.id))
 
 let results = document.querySelector(".results");
 let scores = document.querySelector(".scores");
+let winnerAnnouncement = document.querySelector(".winner-announcement")
