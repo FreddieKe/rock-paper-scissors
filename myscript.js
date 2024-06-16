@@ -17,13 +17,14 @@ function playRound(buttonClicked) {
     console.log(computerChoice);
     let playerChoice = buttonClicked;
     console.log(playerChoice);
-    compareChoices(computerChoice,playerChoice);   
+    compareChoices(computerChoice,playerChoice);
+    scores.textContent = `Player: ${playerScore} Computer: ${computerScore}`;
 }
 
 function compareChoices(computerChoice,playerChoice) {
 // Check for draw
    if (computerChoice === playerChoice) {
-    return console.log("It's a draw!");
+    results.textContent = "It's a draw!";
    }
 //    Check if computer won
    if ((computerChoice === "paper"
@@ -33,12 +34,12 @@ function compareChoices(computerChoice,playerChoice) {
         || (computerChoice === "scissors"
         && playerChoice === "paper"))
     // If computer won alert player
-        { console.log(`You lose! ${computerChoice} beats ${playerChoice}`);
+        {results.textContent = `You lose! ${computerChoice[0].toUpperCase() + computerChoice.substr(1)} beats ${playerChoice}`;
     // If computer won increase computer
       return computerScore++;}
 // Player must have won so alert player
     else {
-        console.log(`You won! ${playerChoice} beats ${computerChoice}`);
+        results.textContent = `You won! ${playerChoice[0].toUpperCase() + playerChoice.substr(1)} beats ${computerChoice}`;
         return playerScore++;}
 }
 
@@ -58,3 +59,7 @@ let scissorsButton = document.querySelector("#scissors");
 buttonContainer.addEventListener("click", (event) => playRound(event.target.id))
 
 
+// Results
+
+let results = document.querySelector(".results");
+let scores = document.querySelector(".scores");
